@@ -31,10 +31,8 @@ export function Register() {
             return setErrMessage("Заполните все поля!");
         }
 
-        Signup(inputValue).then((responseData) => {
+        Signup(inputValue).then(() => {
             setErrMessage('');
-            // setIsAuth(true);
-            // setToken(responseData.user.token);
             navigate(paths.HOME);
         }).catch((error) => {
             setErrMessage(error.message);

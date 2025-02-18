@@ -25,12 +25,12 @@ export const Modal = styled.div`
 export const ModalBlock = styled.div`
     display: block;
     margin: 0 auto;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.bgHeadMod};
     max-width: 368px;
     width: 100%;
     padding: 50px 60px;
     border-radius: 10px;
-    border: 0.7px solid #D4DBE5;
+    border: 0.7px solid ${props => props.theme.border};;
     box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
     @media screen and (max-width: 375px) {
         max-width: 368px;
@@ -69,6 +69,8 @@ export const ModalInput = styled.input`
     outline: none;
     padding: 10px 8px;
     margin-bottom: 7px;
+    background-color: ${props => props.theme.bgHeadMod};
+    color: ${props => props.theme.text};
     &::-moz-placeholder {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
@@ -76,6 +78,7 @@ export const ModalInput = styled.input`
     line-height: 21px;
     letter-spacing: -0.28px;
     color: #94A6BE;
+    background-color: ${props => props.theme.bgHeadMod};
     }
     &::placeholder {
     font-family: "Roboto", sans-serif;
@@ -84,6 +87,7 @@ export const ModalInput = styled.input`
     line-height: 21px;
     letter-spacing: -0.28px;
     color: #94A6BE;
+    background-color: ${props => props.theme.bgHeadMod};
     }
 `;
 

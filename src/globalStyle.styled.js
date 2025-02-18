@@ -40,10 +40,11 @@ ul li {
 }
 html,
 body {
+  background-color: ${props => props.theme.body};
   width: 100%;
   height: 100%;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  color: #000000;
+  color: ${props => props.theme.text};
 }
 `;
 
@@ -52,7 +53,7 @@ export const Wrapper = styled.div`
     width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    background-color: #F1F1F1;
+    background-color: ${props => props.theme.bgLog};
 `;
 
 export const Container = styled.div`
@@ -98,8 +99,29 @@ export const Hover3A = styled.a`
 `;
 
 export const Subttl = css`
-  color: #000;
+  color: ${props => props.theme.text};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
+`;
+
+export const Orange = css`
+  background: ${props => props.theme.bgOrange};
+  color: ${props => props.theme.colorOrange};
+`;
+
+export const Green = css`
+  background: ${props => props.theme.bgGreen};
+  color: ${props => props.theme.colorGreen};
+`;
+
+export const Purple = css`
+  background: ${props => props.theme.bgPurple};
+  color: ${props => props.theme.colorPurple};
+`;
+
+export const ColorTheme = (color) => css`
+  ${color === "_orange" && Orange}
+  ${color === "_green" && Green}
+  ${color === "_purple" && Purple}
 `;

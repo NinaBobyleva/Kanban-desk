@@ -15,12 +15,12 @@ function Header({ user }) {
     return <S.Header>
     <Container>
         <S.HeaderBlock>
-            <S.HeaderLogo className="_show _light">
+            <S.HeaderLogoLight>
                 <a href="" target="_self"><img src="logo.png" alt="logo"/></a>
-            </S.HeaderLogo>
-            <S.HeaderLogo className="_dark">
+            </S.HeaderLogoLight>
+            <S.HeaderLogoDark>
                 <a href="" target="_self"><img src="logo_dark.png" alt="logo"/></a>
-            </S.HeaderLogo>
+            </S.HeaderLogoDark>
             <S.HeaderNav>
                 <S.HeaderBtnMainNew id="btnMainNew"><S.HeaderBtnMainNewA to={paths.NEW_CARD}>Создать новую задачу</S.HeaderBtnMainNewA></S.HeaderBtnMainNew>
                 <S.HeaderUser href="#user-set-target" onClick={userClick}>{user.name}</S.HeaderUser>

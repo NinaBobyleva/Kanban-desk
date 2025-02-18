@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Hover1, Subttl } from "../../../globalStyle.styled";
-
-// export const Orange = 
+import { Hover1, Subttl, ColorTheme } from "../../../globalStyle.styled"; 
 
 export const PopNewCard = styled.div`
     width: 100%;
@@ -41,12 +39,12 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
     display: block;
     margin: 0 auto;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.bgHeadMod};
     max-width: 630px;
     width: 100%;
     padding: 40px 30px 48px;
     border-radius: 10px;
-    border: 0.7px solid #D4DBE5;
+    border: 0.7px solid ${props => props.theme.border};
     position: relative;
     @media screen and (max-width: 660px) {
         border-radius: 0;
@@ -62,7 +60,7 @@ export const PopNewCardContent = styled.div`
 `;
 
 export const PopNewCardTtl = styled.h3`
-    color: #000;
+    color: ${props => props.theme.text};
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
@@ -120,6 +118,7 @@ export const FormNewInput = styled.input`
     font-size: 14px;
     line-height: 1;
     letter-spacing: -0.14px;
+    color: ${props => props.theme.text};
     ::-moz-placeholder {
         font-weight: 400;
         font-size: 14px;
@@ -147,6 +146,7 @@ export const FormNewArea = styled.textarea`
     font-size: 14px;
     line-height: 1;
     letter-spacing: -0.14px;
+    color: ${props => props.theme.text};
     ::-moz-placeholder {
         font-weight: 400;
         font-size: 14px;
@@ -188,13 +188,13 @@ export const CategoriesThemes = styled.div`
 
 export const CategoriesTheme = styled.div`
     display: inline-block;
-    width: 115px;
     height: 30px;
     text-align: center;
     padding: 5px 20px;
     border-radius: 24px;
     margin-right: 7px;
     opacity: ${({$isActiv}) => $isActiv ? '1' : '0.4'};
+    ${props => ColorTheme(props.$topicStyle)}
     label {
         font-size: 14px;
         font-weight: 600;

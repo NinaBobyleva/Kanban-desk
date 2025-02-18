@@ -6,27 +6,28 @@ import { UserContext } from "../../../context/userContext";
 import { postNewTasks } from "../../../api/cardsApi";
 import { useNavigate } from "react-router-dom";
 import { CardsContext } from "../../../context/cardContext";
-import { topicStyles } from "../../../lib/topic";
-// import { topicStyles } from "../../../lib/topic";
+import { DateContext } from "../../../context/dateContext";
+import { TitleDayPicker, SpanDayPicker } from "../../Calendar/Calendar.styled";
 
 
 function PopNewCard() {
-    const colors = {
-        'Web Design': '_orange',
-        'Research': '_green',
-        'Copywriting': '_purple',
-    }
-
+    
     const {user} = useContext(UserContext);
     const [error, setError] = useState('');
     const {setTasks} = useContext(CardsContext);
+    const {dateCalendar, setDateCalendar} = useContext(DateContext);
     const navigation = useNavigate();
-    const [date, setDate] = useState(new Date());
     const [topic, setTopic] = useState('');
+
+    const [value, setValue] = useState(<TitleDayPicker>Выберите срок исполнения.</TitleDayPicker>);
+
+    const handleDayClick = (dateCalendar) => {
+        const formatDate = dateCalendar.toLocaleDateString("RU-ru");
+        setValue(<TitleDayPicker>Срок исполнения: <SpanDayPicker>{formatDate}</SpanDayPicker></TitleDayPicker>);
+    }
 
     const [newInputTask, setNewInputTask] = useState({
         title: '',
-        // topic: '',
         status: 'Без статуса',
         description: '',
     });
@@ -44,11 +45,11 @@ function PopNewCard() {
         }
 
         const title = newInputTask.title || "Новая задача";
-        // const topic = newInputTask.topic || "Research";
 
         const newTask = {
             ...newInputTask,
-            title, topic, date
+            title, topic,
+            date: dateCalendar,
         }
 
         postNewTasks({token: user.token, newTasks: newTask})
@@ -78,20 +79,20 @@ function PopNewCard() {
                                 <S.FormNewArea onChange={onChangedInputTask} value={newInputTask.description} name="description" id="textArea"  placeholder="Введите описание задачи..."></S.FormNewArea>
                             </S.FormNewBlock>
                         </S.PopNewCardForm>
-                        <Calendar date={date} setDate={setDate}/>
+                        <Calendar dateCalendar={dateCalendar} setDateCalendar={setDateCalendar} handleDayClick={handleDayClick} value={value}/>
                     </S.PopNewCardWrap>
                     <S.Categories>
                         <S.CategoriesP>Категория</S.CategoriesP>
                         <S.CategoriesThemes>
-                            <S.CategoriesTheme $isActiv={topic === 'Web Design'} className="_orange">
+                            <S.CategoriesTheme $isActiv={topic === 'Web Design'} $topicStyle="_orange">
                                 <label htmlFor="category1">Web Design</label>
                                 <S.RadioInput onChange={(e) => {setTopic(e.target.value)}} type="radio" name="category" id="category1" value={'Web Design'} />
                             </S.CategoriesTheme>
-                            <S.CategoriesTheme $isActiv={topic === 'Research'} className="_green">
+                            <S.CategoriesTheme $isActiv={topic === 'Research'} $topicStyle="_green">
                                 <label htmlFor="category2">Research</label>
                                 <S.RadioInput onChange={(e) => {setTopic(e.target.value)}} type="radio" name="category" id="category2" value={'Research'} />
                             </S.CategoriesTheme>
-                            <S.CategoriesTheme $isActiv={topic === 'Copywriting'} className="_purple">
+                            <S.CategoriesTheme $isActiv={topic === 'Copywriting'} $topicStyle="_purple">
                                 <label htmlFor="category3">Copywriting</label>
                                 <S.RadioInput onChange={(e) => {setTopic(e.target.value)}} type="radio" name="category" id="category3" value={'Copywriting'} />
                             </S.CategoriesTheme>

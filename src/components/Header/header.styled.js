@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Header = styled.div`
     width: 100%;
     margin: 0 auto;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.bgHeadMod};
 `;
 
 export const HeaderBlock = styled.div`
@@ -20,7 +20,15 @@ export const HeaderBlock = styled.div`
     padding: 0 10px;
 `;
 
-export const HeaderLogo = styled.div`
+export const HeaderLogoLight = styled.div`
+    display: ${({theme}) => theme.isDark ? "none" : "block"};
+    img {
+        width: 85px;
+    }
+`;
+
+export const HeaderLogoDark = styled.div`
+display: ${({theme}) => theme.isDark ? "block" : "none"};
     img {
         width: 85px;
     }
@@ -71,15 +79,15 @@ export const HeaderUser = styled.a`
     justify-content: center;
     font-size: 14px;
     line-height: 20px;
-    color: #565EEF;
+    color: ${props => props.theme.headUs};
     &::after {
         content: "";
         display: block;
         width: 6px;
         height: 6px;
         border-radius: 1px;
-        border-left: 1.9px solid #565EEF;
-        border-bottom: 1.9px solid #565EEF;
+        border-left: 1.9px solid ${props => props.theme.headUs};
+        border-bottom: 1.9px solid ${props => props.theme.headUs};
         transform: rotate(-45deg);
         margin: -6px 0 0 5px;
         padding: 0;
