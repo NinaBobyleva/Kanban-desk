@@ -55,7 +55,6 @@ function PopNewCard() {
         postNewTasks({token: user.token, newTasks: newTask})
         .then((res) => {
             setTasks(res.tasks);
-            console.log(res.tasks);
             navigation(paths.HOME);
         })
         .catch((err) => {

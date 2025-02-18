@@ -67,7 +67,6 @@ export async function editTasks({token, editTask, id}) {
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
 }
 

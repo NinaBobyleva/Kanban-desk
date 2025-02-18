@@ -19,7 +19,6 @@ export async function Signup({ login, name, password }) {
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
 }
 

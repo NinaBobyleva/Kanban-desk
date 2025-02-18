@@ -3,7 +3,6 @@ import Card from "../Card/Card";
 import * as S from "./column.styled";
 
 function Column({ tasks, nameColumn, index }) {
-  console.log(tasks);
   return (
     <S.MainColumn>
       <S.ColumnTitle>{nameColumn}</S.ColumnTitle>
