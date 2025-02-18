@@ -17,12 +17,14 @@ function PopBrowse() {
         'Copywriting': '_purple',
     }
     const {tasks, setTasks} = useContext(CardsContext);
+    console.log(tasks);
     const {user} = useContext(UserContext);
     const [error, setError] = useState('');
     const navigation = useNavigate();
     const [isActiv, setIsActiv] = useState(false);
     const {dateCalendar, setDateCalendar} = useContext(DateContext);
     const {id} = useParams();
+    console.log(id);
     const tasksCard = tasks.find((task) => task._id === id);
     const [editInputTask, setEditInputTask] = useState({
         title: tasksCard.title,
@@ -43,7 +45,9 @@ function PopBrowse() {
 
         editTasks({token: user.token, editTask: editTask, id})
         .then((res) => {
+            console.log(res);
             setTasks(res.tasks);
+            console.log(res.tasks);
             navigation(paths.HOME);
         })
         .catch((err) => {
@@ -64,7 +68,9 @@ function PopBrowse() {
 
     const deleteCards = () => {
         deleteTasks({token: user.token, id}).then((res) => {
+            console.log(res);
             setTasks(res.tasks);
+            console.log(res.tasks);
             navigation(paths.HOME)
         })
         .catch((err) => {
@@ -77,8 +83,11 @@ function PopBrowse() {
         setValue(<TitleDayPicker>Срок исполнения: <SpanDayPicker>{currentDate}</SpanDayPicker></TitleDayPicker>);
     }
 
+    // const onDrop = () => {
+        
+    // }
 
-    return <S.PopBrowse id="popBrowse">
+    return <S.PopBrowse onDragOver={(e) => e.preventDefault()} id="popBrowse">
     <S.PopBrowseContainer>
         <S.PopBrowseBlock>
             <S.PopBrowseContent>
