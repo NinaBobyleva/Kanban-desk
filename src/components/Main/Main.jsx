@@ -10,13 +10,23 @@ import { editTasks } from "../../api/cardsApi";
 
 function Main({ isLoading, isLoadingError }) {
   const { tasks, setTasks } = useContext(CardsContext);
+  console.log("tasks", tasks);
   const { user } = useContext(UserContext);
 
   const onDragEnd = (result) => {
-    const newTasks = tasks;
-    const task = tasks.find((t) => t._id === result.draggableId);
+    console.log("result", result);
+
+    const newTasks = { ...tasks };
+    console.log("newTasks", newTasks);
+    const task = tasks.tasks.find((t) => t._id === result.draggableId);
     task.status = result.destination.droppableId;
-    
+    newTasks[result.source.droppableId].splice(result.source.index, 2);
+    newTasks[result.destination.droppableId].splice(
+      result.destination.index,
+      0,
+      task
+    );
+
     const upDateTask = {
       title: task.title,
       topic: task.topic,
@@ -24,11 +34,7 @@ function Main({ isLoading, isLoadingError }) {
       description: task.description,
       status: task.status,
     };
-    editTasks({ token: user.token, editTask: upDateTask, id: task._id }).then(
-      (res) => {
-        setTasks(res.tasks);
-      }
-    );
+    editTasks({ token: user.token, editTask: upDateTask, id: task._id }).then(() => {});
 
     setTasks(newTasks);
   };
@@ -49,7 +55,7 @@ function Main({ isLoading, isLoadingError }) {
                     key={status}
                     nameColumn={status}
                     index={index}
-                    tasks={tasks.filter((el) => el.status === status)}
+                    tasks={tasks.tasks?.filter((el) => el.status === status)}
                   />
                 ))}
               </DragDropContext>

@@ -9,6 +9,7 @@ import { UserContext } from "../../../context/userContext";
 import { deleteTasks, editTasks } from "../../../api/cardsApi";
 import { TitleDayPicker, SpanDayPicker } from "../../Calendar/Calendar.styled";
 import { DateContext } from "../../../context/dateContext";
+import { transformData } from "../../../helpers/transformData";
 
 function PopBrowse() {
   const colors = {
@@ -23,7 +24,7 @@ function PopBrowse() {
   const [isActiv, setIsActiv] = useState(false);
   const { dateCalendar, setDateCalendar } = useContext(DateContext);
   const { id } = useParams();
-  const tasksCard = tasks.find((task) => task._id === id);
+  const tasksCard = tasks.tasks.find((task) => task._id === id);
   const [editInputTask, setEditInputTask] = useState({
     title: tasksCard.title,
     topic: tasksCard.topic,
@@ -42,8 +43,9 @@ function PopBrowse() {
     };
 
     editTasks({ token: user.token, editTask: editTask, id })
-      .then((res) => {
-        setTasks(res.tasks);
+      .then((tasks) => {
+        const transformedData = transformData(tasks.tasks);
+        setTasks(transformedData);
         navigation(paths.HOME);
       })
       .catch((err) => {
