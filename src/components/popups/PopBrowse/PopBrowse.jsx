@@ -74,8 +74,9 @@ function PopBrowse() {
 
   const deleteCards = () => {
     deleteTasks({ token: user.token, id })
-      .then((res) => {
-        setTasks(res.tasks);
+      .then((tasks) => {
+        const transformedData = transformData(tasks.tasks);
+        setTasks(transformedData);
         navigation(paths.HOME);
       })
       .catch((err) => {
